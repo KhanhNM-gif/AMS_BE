@@ -1,0 +1,8 @@
+/.vs
+/packages
+/obj
+/File
+/bin
+/Lib
+/Web.Release.config
+/Web.Debug.config
