@@ -10,6 +10,7 @@ using BSS.DataValidator;
 using System.Web;
 using System.Data;
 using DocumentFormat.OpenXml.Wordprocessing;
+using iTextSharp.text.pdf;
 
 namespace WebAPI.Controllers
 {

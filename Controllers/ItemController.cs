@@ -127,13 +127,7 @@ namespace WebAPI.Controllers
                 return "Đã tồn tại Vật phẩm: " + inputItem.ItemName + " trong hệ thống".ToMessageForUser();
             }
 
-            //Kiểm tra trường hợp gửi approve nhưng không chọn người duyệt
-            if (inputItem.IsSendApprove)
-            {
-                if (inputItem.UserIDApprove == 0) return "Bạn chưa chọn Người duyệt vật phẩm".ToMessageForUser();
-                inputItem.ItemStatusID = Constants.StatusItem.CD;
-            }
-            else inputItem.ItemStatusID = Constants.StatusItem.MT;
+            inputItem.ItemStatusID = Constants.StatusItem.ĐD_TK;
 
             inputItem.AccountID = UserToken.AccountID;
 
@@ -227,17 +221,6 @@ namespace WebAPI.Controllers
 
             msg = Log.WriteHistoryLog(dbm, inputItem.ItemID == 0 ? "Thêm Vật phẩm" : "Sửa Vật phẩm", outItem.ObjectGuid, UserToken.UserID);
             if (msg.Length > 0) return msg;
-
-            //trường hợp nhấn gửi duyệt
-            if (inputItem.IsSendApprove)
-            {
-                string content = "Yêu cầu duyệt thông tin Vật phẩm cần quản lý";
-                msg = ItemApprove.Insert(dbm, outItem.ItemID.ToString(), content, inputItem.UserIDApprove);
-                if (msg.Length > 0) return msg;
-
-                msg = Log.WriteHistoryLog(dbm, content, inputItem.ObjectGuid, UserToken.UserID);
-                if (msg.Length > 0) return msg;
-            }
 
             return "";
         }

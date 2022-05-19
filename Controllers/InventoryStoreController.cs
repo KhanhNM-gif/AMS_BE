@@ -311,7 +311,7 @@ namespace ASM_API.Controllers
         {
             if (!ResultCheckToken.isOk) return ResultCheckToken;
 
-            string msg = Role.Check(UserToken.UserID, Constants.TabID.QLKKTS, Role.ROLE_QLKKTS_IsVisitPage);
+            string msg = Role.Check(UserToken.UserID, Constants.TabID.QLKKVP, Role.ROLE_QLKKVP_IsVisitPage);
             if (msg.Length > 0) return Log.ProcessError(msg).ToResultError();
 
             msg = DoDoGetListEasySearch(UserToken.UserID, inventoryStoreEasySearch, out int total, out List<InventoryStoreSearchResult> lt);

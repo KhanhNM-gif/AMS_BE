@@ -22,7 +22,7 @@ namespace ASM_API.App_Start.InventoryStore
 
         [Mapping("Nội dung", typeof(Place))]
         public string Content { get; set; }
-        public string TransferDirectionID { get; set; }
+        public string TransferDirectionID { get; set; } = "0";
         [Mapping("Người xử lý", typeof(Place))]
         public int UserHandingID { get; set; }
         public virtual DateTime CreateDate { get; set; }

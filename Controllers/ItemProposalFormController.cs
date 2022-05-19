@@ -413,7 +413,6 @@ namespace ASM_API.Controllers
             if (msg.Length > 0) return msg;
             ItemproposalOut.ltCommentItemProposalForm = ltCommentItemProposalForm.Select(x => new CommentItemProposalForm(x) { }).ToList();
 
-
             msg = SetButtonFuntion(ItemproposalOut);
             if (msg.Length > 0) return msg;
 
@@ -422,7 +421,7 @@ namespace ASM_API.Controllers
         private string SetButtonFuntion(ItemProposalFormViewDetail ItemproposalOut)
         {
             ButtonShowHandlingPDXVP ButtonShowHandlingPDXVP = new ButtonShowHandlingPDXVP();
-            string msg = Role.Check(UserToken.UserID, Constants.TabID.QLPDXVP, Role.ROLE_QLPDXVP_DUYET, out bool IsRoleHandle);
+            string msg = Role.Check(UserToken.UserID, Constants.TabID.QLPNK, Role.ROLE_KHO_CRUD, out bool IsRoleHandle);
             if (msg.Length > 0) return msg;
 
             if (ItemproposalOut.UserIDHandling == UserToken.UserID)
@@ -518,7 +517,7 @@ namespace ASM_API.Controllers
             msg = log.InsertUpdate(dbm, out TransferHandlingLog _);
             if (msg.Length > 0) return msg;
 
-            if (input.UserTransferHandleID == itemProposalForm.UserIDCreate)
+            if (input.UserTransferHandleID == itemProposalForm.UserIDCreate && input is InputReturnItemProposalForm)
             {
                 msg = ItemProposalForm.UpdateStatusID(dbm, itemProposalForm.ID, UserToken.AccountID, input.GetStatusChange());
                 if (msg.Length > 0) return msg;
